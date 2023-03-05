@@ -1,4 +1,15 @@
 // Referência: https://github.com/cristijung/JsModule/blob/main/Aula07/app-comment/js/script06-api.js
+try{
+  comentarios = JSON.parse(localStorage.comentarios);
+  for (let i = 0; i < comentarios.lista.length; i++) {
+    comentarios.lista[i] = JSON.parse(comentarios.lista[i]);
+  }
+} catch(e){
+  localStorage.removeItem('comentarios');
+  comentarios = {"lista" : []};
+  localStorage.comentarios = JSON.stringify(comentarios);
+  console.log(e);
+}
 
 const url = "https://jsonplaceholder.typicode.com/posts";
 
@@ -95,6 +106,7 @@ async function getPost(id) {
   dataComments.map((comment) => {
     createComment(comment);
   });
+
 }
 
 function createComment(comment) {
@@ -124,8 +136,20 @@ function createComment(comment) {
         </div>
     </section>`;
   commentsContainer.appendChild(div);
-  //Salvar o comentário no localStorage em um array de comentários e ao carregar a página, verificar se existe algum comentário salvo no localStorage e se existir, carregar os comentários salvos no localStorage
 }
+
+
+function getComentarios(){
+  if (comentarios.lista.length == 0){
+    return;
+  } 
+  const contador = comentarios.lista.length;
+  for (let i = 0; i < contador; i++){
+    createComment(comentarios.lista[i]);
+    console.log('adc comentario getComentarios');
+  }
+}
+getComentarios();
 
 async function postComment(comment) {
   const response = await fetch(url, {
@@ -141,7 +165,8 @@ async function postComment(comment) {
   createComment(data);
 }
 
-commentForm.addEventListener("submit", (e) => {
+commentForm.addEventListener("submit", (e) => 
+{
   e.preventDefault();
 
   let comment = {
@@ -150,6 +175,10 @@ commentForm.addEventListener("submit", (e) => {
   };
 
   comment = JSON.stringify(comment);
+
+  
+  comentarios.lista.push(comment);
+  localStorage.comentarios = JSON.stringify(comentarios);
 
   postComment(comment);
 
