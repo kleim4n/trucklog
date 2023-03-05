@@ -1,101 +1,140 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<head>
-  <meta charset="UTF-8" />
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <!-- Bootstrap -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
-
-  <link rel="shortcut icon" href="./assets/truck-green.png" type="image/PNG" />
-  <!-- CSS -->
-  <link rel="stylesheet" href="styles.css" />
-  <link rel="stylesheet" href="assets/css/style-simulation.css" />
-  <!-- CSS Breakpoint -->
-  <link rel="stylesheet" href="./mobile.css" media="(max-width: 800px)" />
-  <!-- Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;500;700&family=Poppins&family=Red+Hat+Display:wght@400;500;700&display=swap"
-    rel="stylesheet" />
-  <script src="https://unpkg.com/phosphor-icons"></script>
-  <!-- font-family: 'Anybody', cursive; weigth 700
+    <link
+      rel="shortcut icon"
+      href="./assets/truck-green.png"
+      type="image/PNG"
+    />
+    <!-- CSS -->
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="assets/css/style-simulation.css" />
+    <!-- CSS Breakpoint -->
+    <link rel="stylesheet" href="./mobile.css" media="(max-width: 800px)" />
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Anybody:wght@400;500;700&family=Poppins&family=Red+Hat+Display:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <script src="https://unpkg.com/phosphor-icons"></script>
+    <!-- font-family: 'Anybody', cursive; weigth 700
         font-family: 'Poppins', sans-serif; weigth 400
         font-family: 'Red Hat Tex t', sans-serif; weigth 400 -->
 
-  <title>TruckLog</title>
-</head>
+    <title>TruckLog</title>
+  </head>
 
-<body>
-  <header class="header-container">
-    <div class="header-content">
-      <img class="bg-item" src="./assets/bg-item1.svg" aria-hidden="true" />
-      <img class="logo" src="./assets/truck-log-logo.svg" alt="Caminhão logotipo da TruckLog" />
-      <nav class="desktop">
-        <a href="index.html#our-data-section">Nossos Dados</a>
-        <a href="index.html#how-it-works-container">Como funciona</a>
-        <a href="index.html#main-benefits-section">Benefícios</a>
-        <a href="index.html#faq-section">FAQ</a>
-      </nav>
-      <button class="desktop">
-        <a href="./login/index.html" class="login">Faça Login</a>
-      </button>
-    </div>
-  </header>
-
-  <main>
-    <section id="simulation-form-container">
-      <div class="simulation-form-content">
-        <div>
-          <h1 class="section-title">Vamos simular?</h1>
-          <h2 class="section-subtitle">
-            Preencha o formulário com os CEPs.
-          </h2>
-
-          <img class="desktop" src="./assets/truck-simulation.jpg" alt="Caminhão TruckLog sendo carregado" />
-        </div>
-
-        <form class="form-group">
-          <div class="form-control">
-            <div class="label-container">
-              <div><i class="ph-envelope"></i></div>
-              <label for="cep">CEP de origem</label>
-            </div>
-
-            <input id="cep-origem" name="cep" type="text" placeholder="4200000" required pattern="\d{8}" autofocus/>
-
-            <div class="label-container">
-              <div><i class="ph-envelope"></i></div>
-              <label for="cep">CEP de destino</label>
-            </div>
-
-            <input id="cep-destino" name="cep" type="text" placeholder="4100000" required pattern="\d{8}"/>
-
-            <div class="label-container">
-              <div><i class="ph-envelope"></i></div>
-              <label for="peso">Peso da carga</label>
-            </div>
-
-            <input id="peso" name="peso" type="number" placeholder="0"/>
-          </div>
-          <div class="button-group">
-            <!-- <button type="" onclick="dispararPesquisaCeps()">Calcular</button> -->
-            <input type="button" class="btn btn-outline-success" value="Consultar CEPs" onclick="dispararPesquisaCeps()">
-            <input type="button" class="btn btn-outline-danger" value="Limpar CEPs" onclick="limparPesquisaCeps()">
-            <input type="button" class="btn btn-outline-success" value="Calcular frete" onclick="calcularFrete()">
-            <!-- <button type="" onclick="limparPesquisaCeps()">Limpar</button> -->
-          </div>
-        </form>
+  <body>
+    <header class="header-container">
+      <div class="header-content">
+        <img class="bg-item" src="./assets/bg-item1.svg" aria-hidden="true" />
+        <img
+          class="logo"
+          src="./assets/truck-log-logo.svg"
+          alt="Caminhão logotipo da TruckLog"
+        />
+        <nav class="desktop">
+          <a href="index.html#our-data-section">Nossos Dados</a>
+          <a href="index.html#how-it-works-container">Como funciona</a>
+          <a href="index.html#main-benefits-section">Benefícios</a>
+          <a href="index.html#faq-section">FAQ</a>
+        </nav>
+        <button class="desktop">
+          <a href="./login/index.html" class="login">Faça Login</a>
+        </button>
       </div>
-    </section>
+    </header>
 
-    <section id="simulation-completed">
-      <div class="">
-        <div id="resposta"></div>
-        <!-- <table class="table table-striped">
+    <main>
+      <section id="simulation-form-container">
+        <div class="simulation-form-content">
+          <div>
+            <h1 class="section-title">Vamos simular?</h1>
+            <h2 class="section-subtitle">Preencha o formulário com os CEPs.</h2>
+
+            <img
+              class="desktop"
+              src="./assets/truck-simulation.jpg"
+              alt="Caminhão TruckLog sendo carregado"
+            />
+          </div>
+
+          <form class="form-group">
+            <div class="form-control">
+              <div class="label-container">
+                <div><i class="ph-map-pin"></i></div>
+                <label for="cep">CEP de origem</label>
+              </div>
+
+              <input
+                id="cep-origem"
+                name="cep"
+                type="text"
+                placeholder="4200000"
+                required
+                pattern="\d{8}"
+                autofocus
+              />
+            </div>
+
+            <div class="form-control">
+              <div class="label-container">
+                <div><i class="ph-map-pin"></i></div>
+                <label for="cep">CEP de destino</label>
+              </div>
+
+              <input
+                id="cep-destino"
+                name="cep"
+                type="text"
+                placeholder="4100000"
+                required
+                pattern="\d{8}"
+              />
+            </div>
+
+            <div class="form-control">
+              <div class="label-container">
+                <div><i class="ph-scales"></i></div>
+                <label for="peso"
+                  >Peso da carga <small>(toneladas)</small></label
+                >
+              </div>
+
+              <input id="peso" name="peso" type="number" placeholder="0" />
+            </div>
+            <div class="button-group">
+              <input
+                type="button"
+                value="Consultar"
+                onclick="dispararPesquisaCeps()"
+              />
+              <input
+                type="button"
+                value="Limpar"
+                id="clear"
+                onclick="limparPesquisaCeps()"
+              />
+              <input
+                type="button"
+                value="Calcular frete"
+                onclick="calcularFrete()"
+              />
+            </div>
+          </form>
+        </div>
+      </section>
+
+      <section id="simulation-completed">
+        <div class="">
+          <div id="resposta"></div>
+          <!-- <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -122,8 +161,8 @@
             </tr>
           </tbody>
         </table> -->
-        <!-- <hr> -->
-        <!-- <table class="table table-striped">
+          <!-- <hr> -->
+          <!-- <table class="table table-striped">
           <thead>
             <tr>
               <th scope="col">#</th>
@@ -139,25 +178,42 @@
             </tr>
           </tbody>
         </table> -->
-      </div>
-      <!-- <div>
+        </div>
+        <!-- <div>
         <button type="reset" onclick="">Limpar</button>
       </div> -->
-    </section>
+      </section>
+    </main>
 
     <footer class="footer-section">
       <div class="footer-content">
         <nav>
           <ul>
-            <li class="desktop"><a href="index.html#main-benefits-section">Benefícios</a></li>
-            <li class="desktop"><a href="index.html#our-data-section">Dados</a></li>
-            <li class="desktop"><a href="index.html#home-container">Home</a></li>
-            <li>
-              <a href="index.html#" class="footer-truck-logo"><img src="./assets/truck-log-logo.svg" alt="Caminhão logotipo da TruckLog" /></a>
+            <li class="desktop">
+              <a href="index.html#main-benefits-section">Benefícios</a>
             </li>
-            <li class="desktop"><a href="index.html#partners-container">Parceiros</a></li>
-            <li class="desktop"><a href="index.html#how-it-works-container">Como funciona</a></li>
-            <li class="desktop"><a href="index.html#product-form-container">Contrate</a></li>
+            <li class="desktop">
+              <a href="index.html#our-data-section">Dados</a>
+            </li>
+            <li class="desktop">
+              <a href="index.html#home-container">Home</a>
+            </li>
+            <li>
+              <a href="index.html#" class="footer-truck-logo"
+                ><img
+                  src="./assets/truck-log-logo.svg"
+                  alt="Caminhão logotipo da TruckLog"
+              /></a>
+            </li>
+            <li class="desktop">
+              <a href="index.html#partners-container">Parceiros</a>
+            </li>
+            <li class="desktop">
+              <a href="index.html#how-it-works-container">Como funciona</a>
+            </li>
+            <li class="desktop">
+              <a href="index.html#product-form-container">Contrate</a>
+            </li>
           </ul>
         </nav>
 
@@ -193,17 +249,23 @@
         </div>
 
         <div class="footer-info-container">
-          <span>2010 - 2022 <a href="#" onclick="alertPoliticaDePrivacidade()">Privacy - Terms</a></span>
+          <span
+            >2010 - 2022
+            <a href="#" onclick="alertPoliticaDePrivacidade()"
+              >Privacy - Terms</a
+            ></span
+          >
         </div>
       </div>
     </footer>
-    <script src="js/setHref.js"> </script>
+
+    <script src="js/setHref.js"></script>
     <script src="js/consultaCep.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN"
-      crossorigin="anonymous"></script>
-
-</body>
-<!-- <a href="https://www.freepik.com/free-photo/3d-render-freight-container-forklift_1110778.htm#query=frete%20de%20caminh%C3%A3o&position=23&from_view=search&track=robertav1">Image by kjpargeter</a> on Freepik -->
-
+      crossorigin="anonymous"
+    ></script>
+  </body>
+  <!-- <a href="https://www.freepik.com/free-photo/3d-render-freight-container-forklift_1110778.htm#query=frete%20de%20caminh%C3%A3o&position=23&from_view=search&track=robertav1">Image by kjpargeter</a> on Freepik -->
 </html>
