@@ -100,6 +100,8 @@ async function calcularFrete() {
 
   if (document.querySelectorAll(".cepCard").length !== 2) {
     await dispararPesquisaCeps();
+    alert("Calcule novamente o frete");
+    return;
   }
 
   if (!(estados.length == 2) && estados.length == 2) {
@@ -167,7 +169,7 @@ async function calcularFrete() {
                       <h5 class="card-title">Valor simulado</h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Distância: ${distancia} m</li>
+                        <li class="list-group-item">Distância: ${parseInt(distancia)} km</li>
                         <li class="list-group-item">${valorFormatado}</li>
                     </ul>                  
                     </div>
