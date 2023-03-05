@@ -11,7 +11,7 @@ const commentsContainer = document.querySelector("#comments-container");
 
 const commentForm = document.querySelector("#comment-form");
 const sendCommentBtn = document.querySelector("#send-comment");
-const emailInput = document.querySelector("#email");
+const emailInput = document.querySelector("#email-comment");
 const bodyInput = document.querySelector("#body");
 
 const urlSearchParams = new URLSearchParams(window.location.search);
@@ -27,7 +27,7 @@ async function getAllPosts() {
   loadingElement.classList.add("hide");
 
   // data.map((post) => {
-    for (let i = 0; i < 5; i++) {
+  for (let i = 0; i < 5; i++) {
     const post = data[i];
     const div = document.createElement("div");
     // const title = document.createElement("h3");
@@ -46,10 +46,9 @@ async function getAllPosts() {
     // div.appendChild(image);
     // div.appendChild(link);
     // div.appendChild(separar);
-      div.id = `post-${post.id}`;
-      
-    div.innerHTML =
-    `<section class="text-black p-3 mb-5 rounded shadow" style="max-width: 800px; margin: 10px auto; background: white;">
+    div.id = `post-${post.id}`;
+
+    div.innerHTML = `<section class="text-black p-3 mb-5 rounded shadow" style="max-width: 800px; margin: 10px auto; background: white;">
         <div class="d-flex align-items-center">
             <h5 class="">${post.title}</h5>
             <h4>${post.body}</h4>
@@ -66,9 +65,7 @@ async function getAllPosts() {
         </div>
     </section>`;
     postsContainer.appendChild(div);
-      
-  
-}
+  }
   // });
 }
 getAllPosts();
@@ -110,8 +107,7 @@ function createComment(comment) {
 
   // div.appendChild(email);
   // div.appendChild(commentBody);
-  div.innerHTML =
-    `<section class="text-black p-3 mb-5 rounded shadow" style="max-width: 800px; margin: 10px auto; background: white;">
+  div.innerHTML = `<section class="text-black p-3 mb-5 rounded shadow" style="max-width: 800px; margin: 10px auto; background: white;">
         <div class="d-flex align-items-center">
             <h5 class="">${comment.email}</h5>
             <h4>${comment.body}</h4>
@@ -156,4 +152,7 @@ commentForm.addEventListener("submit", (e) => {
   comment = JSON.stringify(comment);
 
   postComment(comment);
+
+  emailInput.value = "";
+  bodyInput.value = "";
 });
