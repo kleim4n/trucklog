@@ -108,22 +108,25 @@ const randomColor = () => {
   return `rgb(${red}, ${green}, ${blue})`;
 };
 
+const padraoEmail = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/;
+
 async function validarLogin() {
   userListGlobal = userListGlobal = {
     "quantidade": 0,
     "usuarios": []
   };
+  email = document.getElementById("email").value;
+  if (!padraoEmail.test(email)) {return alert("Email inválido");}
+  senha = document.getElementById("password").value;
+  if (senha.length == 0) {return alert("Senha vazia");}
   await listar(`../assets/usuarios/usuarios.json`, false, true);
   await listar(`https://serverest.dev/usuarios`, false, true);
-  email = document.getElementById("email").value;
-  senha = document.getElementById("password").value;
-  console.log(`email: ${email} senha: ${senha}`);
   let emails = userListGlobal.usuarios.map((user) => user.email);
   if (emails.includes(email)) {
     if (userListGlobal.usuarios[emails.indexOf(email)].password === senha) {
       usuarioExiste = userListGlobal.usuarios[emails.indexOf(email)];
       console.log(usuarioExiste['_id']);
-      localStorage.setItem("usuario", `${usuarioExiste['_id']}`);
+      localStorage.setItem("usuario", JSON.stringify(usuarioExiste));
       window.location.href = "../meus-posts/index.html";
     } else {
       alert("Senha incorreta");
