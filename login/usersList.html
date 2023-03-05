@@ -66,7 +66,7 @@
           >
             <div class="d-flex align-items-center gap-2">
               <h1 class="h1-user-list">Usuários cadastrados</h1>
-              <p class="fs-2 h1-user-list" id="quantidade"></p>
+              <!-- <p class="fs-2 h1-user-list" id="quantidade"></p> -->
             </div>
             <p class="text-info-login">
               <a class="form-link" href="./sign-up.html">Voltar</a>
@@ -89,5 +89,9 @@
       crossorigin="anonymous"
     ></script>
     <script src="./scriptLogin.js"></script>
+    <script>
+      listar(`../assets/usuarios/usuarios.json`);
+      listar(`https://serverest.dev/usuarios`);
+    </script>
   </body>
 </html>

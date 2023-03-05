@@ -1,0 +1,26 @@
+{
+    "quantidade": 3,
+    "usuarios": [
+        {
+            "nome": "Ana Alcantra",
+            "email": "ana@qa.com",
+            "password": "anaqa",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz2"
+        },
+        {
+            "nome": "Bernardo Bosques",
+            "email": "bernardo@qa.com",
+            "password": "bernardoqa",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz3"
+        },
+        {
+            "nome": "Gabriel Kleiman",
+            "email": "g@k.com",
+            "password": "k",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz4"
+        }
+    ]
+}
