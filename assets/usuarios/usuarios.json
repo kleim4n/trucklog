@@ -6,21 +6,32 @@
             "email": "ana@qa.com",
             "password": "anaqa",
             "administrador": "true",
-            "_id": "0uxuPY0cbmQhpEz2"
+            "_id": "0uxuPY0cbmQhpEz2",
+            "foto": "../assets/usuarios/profiles/ana.jpg"
         },
         {
             "nome": "Bernardo Bosques",
             "email": "bernardo@qa.com",
             "password": "bernardoqa",
             "administrador": "true",
-            "_id": "0uxuPY0cbmQhpEz3"
+            "_id": "0uxuPY0cbmQhpEz3",
+            "foto": "../assets/usuarios/profiles/bernardo.jpg"
         },
         {
             "nome": "Gabriel Kleiman",
             "email": "g@k.com",
             "password": "k",
             "administrador": "true",
-            "_id": "0uxuPY0cbmQhpEz4"
+            "_id": "0uxuPY0cbmQhpEz4",
+            "foto": "../assets/usuarios/profiles/gabriel.png"
+        },
+        {
+            "nome": "Teste Teste",
+            "email": "t@t.com",
+            "password": "teste",
+            "administrador": "true",
+            "_id": "0uxuPY0cbmQhpEz4",
+            "foto": "../assets/usuarios/profiles/gabriel.png"
         }
     ]
 }
