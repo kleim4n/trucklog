@@ -1,8 +1,14 @@
 // Referência: https://github.com/cristijung/JsModule/blob/main/Aula07/app-comment/js/script06-api.js
-if (localStorage.comentarios == undefined){
-  var comentarios = {"lista" : []};
-} else {
+try{
   comentarios = JSON.parse(localStorage.comentarios);
+  for (let i = 0; i < comentarios.lista.length; i++) {
+    comentarios.lista[i] = JSON.parse(comentarios.lista[i]);
+  }
+} catch(e){
+  localStorage.removeItem('comentarios');
+  comentarios = {"lista" : []};
+  localStorage.comentarios = JSON.stringify(comentarios);
+  console.log(e);
 }
 
 const url = "https://jsonplaceholder.typicode.com/posts";
@@ -73,7 +79,7 @@ async function getAllPosts() {
   }
   // });
 }
-//getAllPosts();
+getAllPosts();
 
 async function getPost(id) {
   const [responsePost, responseComments] = await Promise.all([
@@ -130,21 +136,20 @@ function createComment(comment) {
         </div>
     </section>`;
   commentsContainer.appendChild(div);
-  comentarios.lista.push(comment);
-  localStorage.setItem("comentarios", JSON.stringify(comentarios));
 }
 
 
 function getComentarios(){
   if (comentarios.lista.length == 0){
-    return 
+    return;
   } 
-  for (i = 0; i <= comentarios.lista.length + 1; i++){
-    createComment(comentarios.lista[i])
+  const contador = comentarios.lista.length;
+  for (let i = 0; i < contador; i++){
+    createComment(comentarios.lista[i]);
+    console.log('adc comentario getComentarios');
   }
 }
-
-//getComentarios();
+getComentarios();
 
 async function postComment(comment) {
   const response = await fetch(url, {
@@ -160,7 +165,8 @@ async function postComment(comment) {
   createComment(data);
 }
 
-commentForm.addEventListener("submit", (e) => {
+commentForm.addEventListener("submit", (e) => 
+{
   e.preventDefault();
 
   let comment = {
@@ -169,6 +175,10 @@ commentForm.addEventListener("submit", (e) => {
   };
 
   comment = JSON.stringify(comment);
+
+  
+  comentarios.lista.push(comment);
+  localStorage.comentarios = JSON.stringify(comentarios);
 
   postComment(comment);
 
