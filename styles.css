@@ -339,6 +339,10 @@ button.desktop a.login {
   color: var(--gray-300);
 }
 
+.functionality-item a {
+  margin-top: 4rem;
+}
+
 /* PRODUCT FORM SECTION */
 .product-form-content {
   padding: 8rem 0;
