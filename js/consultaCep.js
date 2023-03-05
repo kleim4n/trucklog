@@ -85,9 +85,6 @@ const dispararPesquisaCeps = () => {
 };
 
 const limparPesquisaCeps = () => {
-  document.querySelector("#cep-origem").value = "";
-  document.querySelector("#cep-destino").value = "";
-  document.querySelector("#peso").value = "";
   document.getElementById("resposta").innerHTML = "";
   estados = [];
   cidades = [];
@@ -102,7 +99,7 @@ async function calcularFrete() {
   }
 
   if (document.querySelectorAll(".cepCard").length !== 2) {
-    dispararPesquisaCeps();
+    await dispararPesquisaCeps();
   }
 
   if (!(estados.length == 2) && estados.length == 2) {
@@ -170,7 +167,7 @@ async function calcularFrete() {
                       <h5 class="card-title">Valor simulado</h5>
                     </div>
                     <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Distância: ${distancia} km</li>
+                        <li class="list-group-item">Distância: ${distancia} m</li>
                         <li class="list-group-item">${valorFormatado}</li>
                     </ul>                  
                     </div>
