@@ -4,14 +4,16 @@ var userListGlobal = {
 };
 
 async function listarUsuarios(userList) {
-  var cont = parseInt(userList.quantidade);
-  const parar = parseInt(cont);
+  // var cont = parseInt(userList.quantidade);
+  // const parar = parseInt(cont);
   // document.querySelector("#quantidade").innerText = `(${cont})`;
   const ul = document.querySelector("#resposta");
-  for (i = 0; i < parar; i++) {
+  for (i = 0; i < userList.usuarios.length; i++) {
     const li = document.createElement("li");
     li.classList.add("d-flex", "border-bottom");
     li.innerHTML = `<img
+                      alt="Foto ${userList.usuarios[i].nome}"
+                      src="${(userList.usuarios[i].foto != undefined) ? (userList.usuarios[i].foto) : '../assets/usuarios/profiles/gabriel.png'}"
                       width="32"
                       height="32"
                       class="flex-shrink-0 me-2 rounded"
