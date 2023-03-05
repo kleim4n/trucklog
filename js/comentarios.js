@@ -1,4 +1,9 @@
 // Referência: https://github.com/cristijung/JsModule/blob/main/Aula07/app-comment/js/script06-api.js
+if (localStorage.comentarios == undefined){
+  var comentarios = {"lista" : []};
+} else {
+  comentarios = JSON.parse(localStorage.comentarios);
+}
 
 const url = "https://jsonplaceholder.typicode.com/posts";
 
@@ -68,7 +73,7 @@ async function getAllPosts() {
   }
   // });
 }
-getAllPosts();
+//getAllPosts();
 
 async function getPost(id) {
   const [responsePost, responseComments] = await Promise.all([
@@ -95,6 +100,7 @@ async function getPost(id) {
   dataComments.map((comment) => {
     createComment(comment);
   });
+
 }
 
 function createComment(comment) {
@@ -124,8 +130,21 @@ function createComment(comment) {
         </div>
     </section>`;
   commentsContainer.appendChild(div);
-  //Salvar o comentário no localStorage em um array de comentários e ao carregar a página, verificar se existe algum comentário salvo no localStorage e se existir, carregar os comentários salvos no localStorage
+  comentarios.lista.push(comment);
+  localStorage.setItem("comentarios", JSON.stringify(comentarios));
 }
+
+
+function getComentarios(){
+  if (comentarios.lista.length == 0){
+    return 
+  } 
+  for (i = 0; i <= comentarios.lista.length + 1; i++){
+    createComment(comentarios.lista[i])
+  }
+}
+
+//getComentarios();
 
 async function postComment(comment) {
   const response = await fetch(url, {
