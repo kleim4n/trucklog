@@ -26,12 +26,21 @@ Esse projeto foi desenvolvido com as seguintes tecnologias:
 
 - HTML
 - CSS (Flexbox)
+- JavaScript
 - Git e Github
 - Phosphor Icons - CDN
 
 ## 💻 Projeto
 
-O objetivo desta task era criarmos uma Landing Page baseado em um tema de uma empresa cliente da DBC.
+O objetivo desta task era dar funcionalidade a Landing Page original baseado em um tema de uma empresa cliente da DBC.
+<details>
+  <summary>Sistema de Login</summary>
+  <p>Para simular uma conexão de API, foi utilizado um arquivo JSON contendo os usuários e chamado via fetch de forma similar ao que seria feito com uma url, dessa forma caso o dados de e-mail e senha sejam idênticos ao do JSON, o usuário é salvo no localStorage para persistir nas demais páginas onde esta informação é importante.</p>
+</details>
+<details>
+  <summary>Sistema de Comentários</summary>
+  <p>Para simular uma conexão de API, foi utilizado o localStorage ao salvar os comentários locais em String formatada como JSON, ao reiniciar a página, o localStorage é lido e caso existam comentários registrados estes serão exibidos. Outros comentários exibidos são referentes aos textos recebidos via API, o cenário de produção seria enviar os comentários para serem salvos via API.</p>
+</details>
 
 > Nosso tema foi: Landing Page de Sistema de controle de rotas e abastecimento com gestão de frotas.
 
@@ -49,3 +58,4 @@ Esse projeto está sob a licença MIT.
 ---
 
 Made with 💙 by Alberto, Luan e Rafael
+Forked by Cláudio Henrique, Danilo Torquato, Diego Vieira e Gabriel Kleiman 
