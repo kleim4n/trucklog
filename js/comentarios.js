@@ -1,12 +1,12 @@
 // Referência: https://github.com/cristijung/JsModule/blob/main/Aula07/app-comment/js/script06-api.js
-try{
+try {
   comentarios = JSON.parse(localStorage.comentarios);
   for (let i = 0; i < comentarios.lista.length; i++) {
     comentarios.lista[i] = JSON.parse(comentarios.lista[i]);
   }
-} catch(e){
-  localStorage.removeItem('comentarios');
-  comentarios = {"lista" : []};
+} catch (e) {
+  localStorage.removeItem("comentarios");
+  comentarios = { lista: [] };
   localStorage.comentarios = JSON.stringify(comentarios);
   console.log(e);
 }
@@ -37,47 +37,16 @@ async function getAllPosts() {
   const data = await response.json();
   loadingElement.classList.add("hide");
 
-  // data.map((post) => {
   for (let i = 0; i < 5; i++) {
     const post = data[i];
     const div = document.createElement("div");
-    // const title = document.createElement("h3");
-    // const body = document.createElement("p");
-    // const image = document.createElement("img");
-    // const link = document.createElement("a");
-    // const separar = document.createElement("hr");
 
-    // title.innerText = post.title;
-    // body.innerText = post.body;
-    // link.innerText = "Comentar post";
-    // link.setAttribute("href", `./enviar-comentario06.html?id=${post.id}`);
-
-    // div.appendChild(title);
-    // div.appendChild(body);
-    // div.appendChild(image);
-    // div.appendChild(link);
-    // div.appendChild(separar);
     div.id = `post-${post.id}`;
 
-    div.innerHTML = `<section class="text-black p-3 mb-5 rounded shadow" style="max-width: 800px; margin: 10px auto; background: white;">
-        <div class="d-flex align-items-center">
-            <h5 class="">${post.title}</h5>
-            <h4>${post.body}</h4>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <p class="">Data de envio: <span style="font-weight: bold;">03/03/2023</span></p>
-            <p class="">Avaliação: <span class="post-${post.id} rating">
-              ${starIcon}
-              ${starIcon}
-              ${starIcon}
-              ${starIcon}
-              ${starIcon}
-            </span></p>
-        </div>
-    </section>`;
+    div.innerHTML = createCommentSection(post.id, post.title, post.body);
+
     postsContainer.appendChild(div);
   }
-  // });
 }
 getAllPosts();
 
@@ -106,47 +75,47 @@ async function getPost(id) {
   dataComments.map((comment) => {
     createComment(comment);
   });
-
 }
 
 function createComment(comment) {
   const div = document.createElement("div");
-  // const email = document.createElement("h3");
-  // const commentBody = document.createElement("p");
+  div.innerHTML = createCommentSection(comment.id, comment.email, comment.body);
 
-  // email.innerText = comment.email;
-  // commentBody.innerText = comment.body;
-
-  // div.appendChild(email);
-  // div.appendChild(commentBody);
-  div.innerHTML = `<section class="text-black p-3 mb-5 rounded shadow" style="max-width: 800px; margin: 10px auto; background: white;">
-        <div class="d-flex align-items-center">
-            <h5 class="">${comment.email}</h5>
-            <h4>${comment.body}</h4>
-        </div>
-        <div class="d-flex justify-content-between align-items-center mt-3">
-            <p class="">Data de envio: <span style="font-weight: bold;">03/03/2023</span></p>
-            <p class="">Avaliação: <span class="post-comment rating">
-              ${starIcon}
-              ${starIcon}
-              ${starIcon}
-              ${starIcon}
-              ${starIcon}
-            </span></p>
-        </div>
-    </section>`;
   commentsContainer.appendChild(div);
 }
 
+const createCommentSection = (id, email, body) => {
+  return `<section class="comment">
+        <div class="comment-header">
+            <h4>${email}</h4>
+            <p>
+              Data de envio:
+              <small>03/03/2023</small>
+            </p>
+            <p>
+              Avaliação:
+              <span class="post-${id} rating">
+              ${starIcon}
+              ${starIcon}
+              ${starIcon}
+              ${starIcon}
+              ${starIcon}
+              </span>
+            </p>
+        </div>
+        <div class="comment-content">
+            <p>${body}</p>
+        </div>
+    </section>`;
+};
 
-function getComentarios(){
-  if (comentarios.lista.length == 0){
+function getComentarios() {
+  if (comentarios.lista.length == 0) {
     return;
-  } 
+  }
   const contador = comentarios.lista.length;
-  for (let i = 0; i < contador; i++){
+  for (let i = 0; i < contador; i++) {
     createComment(comentarios.lista[i]);
-    console.log('adc comentario getComentarios');
   }
 }
 getComentarios();
@@ -165,8 +134,7 @@ async function postComment(comment) {
   createComment(data);
 }
 
-commentForm.addEventListener("submit", (e) => 
-{
+commentForm.addEventListener("submit", (e) => {
   e.preventDefault();
 
   let comment = {
@@ -176,7 +144,6 @@ commentForm.addEventListener("submit", (e) =>
 
   comment = JSON.stringify(comment);
 
-  
   comentarios.lista.push(comment);
   localStorage.comentarios = JSON.stringify(comentarios);
 
