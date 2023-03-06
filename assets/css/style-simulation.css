@@ -91,36 +91,47 @@
     color: var(--green-500);
 }
 
-.btn-outline-success{
-    font-size: 2rem;
-}
-
-.btn-outline-danger{
-    font-size: 2rem;
-}
-
-#simulation-completed {
-    margin: 50px;
-}
-
-#simulation-completed tr{
-    font-size: medium;
-}
-
-.bg-light-green{
+.bg-light-green {
     background: var(--green-300);
 }
 
 /* Resposta */
-#resposta {
+div#resposta {
+    width: 75%;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    margin: 5px;
+    justify-content: space-around;
+    margin: 0 auto;
 }
 
-#resposta div {
-    margin: 5px;
-    border-radius: 5px;
+.card-container {
+    width: 30%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border: 1px solid var(--green-700);
+    border-radius: 1rem;
+    box-shadow: 0px 3.62573px 3.62573px rgba(60, 189, 150, 0.22);
 }
 
+.card-title {
+    font-size: 2.5rem;
+    color: var(--green-700);
+    margin-bottom: 1rem;
+}
+
+.card-content {
+    padding-top: 1rem;
+    font-size: 2rem;
+    color: var(--green-700);
+    text-align: justify;
+}
+
+.card-separator {
+    width: 100%;
+    border-top: 1px solid var(--green-700);
+}
+
+.cep-not-found p {
+    color: var(--red-500);
+}

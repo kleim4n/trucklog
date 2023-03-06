@@ -52,27 +52,52 @@ async function pesquisarCep(cepID) {
         return response.json();
       })
       .then((conteudo) => {
+        const cardTitle = cepID === "cep-origem" ? "Origem" : "Destino";
+
         if ("erro" in conteudo) {
           document.getElementById(
             "resposta"
-          ).innerHTML = `<h5>CEP não encontrado</h5>`;
+          ).innerHTML = `<div class="card-container">
+            <div class="card-title">
+              <h5>${cardTitle}</h5>
+            </div>
+            <div class="card-separator"></div>
+            <div class="card-content cep-not-found">
+              <p>
+                <strong>CEP não encontrado</strong>
+              </p>
+            </div>
+          </div>`;
         } else {
           cidades.unshift(conteudo.localidade);
           estados.unshift(conteudo.uf);
           document.getElementById(
             "resposta"
-          ).innerHTML += `<div class="card cepCard" style="width: 18rem;">                
-                    <div class="card-body">
-                      <h5 class="card-title">${conteudo.cep}</h5>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Lougradouro: ${conteudo.logradouro}</li>
-                        <li class="list-group-item">Localidade: ${conteudo.localidade}</li>
-                        <li class="list-group-item">UF: ${conteudo.uf}</li>
-                        <li class="list-group-item">A TruckLog atende na sua região</li>
-                    </ul>                  
-                    </div>
-                  </div> <hr/>`;
+          ).innerHTML += `<div class="card-container cepCard">
+            <div class="card-title">
+              <h5>${cardTitle}</h5>
+            </div>
+            <div class="card-separator"></div>
+            <div class="card-content">
+              <p>
+                <strong>CEP:</strong>
+                <span>${conteudo.cep}</span>
+              </p>
+              <p>
+                <strong>Logradouro:</strong>
+                <span>${conteudo.logradouro}</span>
+              </p>
+              <p>
+                <strong>Localidade:</strong>
+                <span>${conteudo.localidade}</span>
+              </p>
+              <p>
+                <strong>UF:</strong>
+                <span>${conteudo.uf}</span>
+              </p>
+              <small>A TruckLog atende na sua região</small>
+            </div>
+          </div>`;
         }
       });
   }
@@ -126,9 +151,6 @@ async function calcularFrete() {
     }
   });
 
-  // let estadoOrigem = ufEstados[estados[0]];
-  // let estadoDestino = ufEstados[estados[1]];
-
   let origem = cidades[0] + "," + estadoOrigem;
   let destino = cidades[1] + "," + estadoDestino;
   console.log(origem);
@@ -151,8 +173,7 @@ async function calcularFrete() {
     })
     .then((conteudo) => {
       if (peso === "0" || peso === "") {
-        // document.getElementById('resposta').innerHTML = `<h5>Peso da carga tem que ser maior que 0</h5>`
-        console.log("Peso da carga tem que ser maior que 0");
+        alert("Peso da carga tem que ser maior que 0");
         return;
       } else {
         let distancia = conteudo.resourceSets[0].resources[0].travelDistance;
@@ -164,16 +185,26 @@ async function calcularFrete() {
         });
         document.getElementById(
           "resposta"
-        ).innerHTML += `<div class="card frete-calculado" style="width: 18rem;">                
-                    <div class="card-body">
-                      <h5 class="card-title">Valor simulado</h5>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Distância: ${parseInt(distancia)} km</li>
-                        <li class="list-group-item">${valorFormatado}</li>
-                    </ul>                  
-                    </div>
-                  </div> <hr/>`;
+        ).innerHTML += `<div class="card-container">
+            <div class="card-title">
+              <h5>Simulação</h5>
+            </div>
+            <div class="card-separator"></div>
+            <div class="card-content">
+              <p>
+                <strong>Distância:</strong>
+                <span>${parseInt(distancia)} km</span>
+              </p>
+              <p>
+                <strong>Total:</strong>
+                <span>${valorFormatado}</span>
+              </p>
+            </div>
+          </div>`;
       }
     });
+
+  document.querySelector("#peso").value = "";
+  document.querySelector("#cep-origem").value = "";
+  document.querySelector("#cep-destino").value = "";
 }
