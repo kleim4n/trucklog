@@ -62,39 +62,58 @@ function cadastrarEmUserListGlobal(userList) {
   userListGlobal.usuarios = userListGlobal.usuarios.concat(userList.usuarios);
 }
 
+const readFromLocalStorage = () => {
+  let users = JSON.parse(localStorage.usuariosCriados);
+  if (users) {
+    userListGlobal.quantidade += users.quantidade;
+    userListGlobal.usuarios = userListGlobal.usuarios.concat(users.usuarios.map((user) => JSON.parse(user)));
+  }
+}
+
 const criar = async () => {
   const nome = document.getElementById("name").value;
   const email = document.getElementById("email").value;
+  const password = document.getElementById("password").value;
 
-  await fetch(`https://serverest.dev/usuarios`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      nome: `${nome}`,
-      email: `${email}`,
-      password: "teste",
-      administrador: "true",
-    }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((response) => {
-      if (!response) {
-        alert(`${response.message}`);
-        clearInputs();
-        return;
-      }
-      alert(`${response.message}`);
-      clearInputs();
-      window.location.reload();
-    })
-    .catch((error) => console.log(error));
+  localStorage.usuarioCriado = `{
+        "nome": "${nome}",
+        "email": "${email}",
+        "password": "${password}",
+        "administrador": "false",
+        "_id": "0uxuPY0cbmQhpEz4",
+        "foto": "../assets/usuarios/profiles/gabriel.png"}`;
+  alert('Usuário criado com sucesso!');
+  window.location.href = "../login/index.html";
+
+  // await fetch(`https://serverest.dev/usuarios`, {
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   body: JSON.stringify({
+  //     nome: `${nome}`,
+  //     email: `${email}`,
+  //     password: "teste",
+  //     administrador: "true",
+  //   }),
+  // })
+  //   .then((response) => {
+  //     if (!response.ok) {
+  //       throw new Error(`HTTP error: ${response.status}`);
+  //     }
+  //     return response.json();
+  //   })
+  //   .then((response) => {
+  //     if (!response) {
+  //       alert(`${response.message}`);
+  //       clearInputs();
+  //       return;
+  //     }
+  //     alert(`${response.message}`);
+  //     clearInputs();
+  //     window.location.reload();
+  //   })
+  //   .catch((error) => console.log(error));
 };
 
 const clearInputs = () => {
@@ -134,9 +153,23 @@ async function validarLogin() {
       alert("Senha incorreta");
       return;
     }
-  } 
+  }
   else {
-    alert("Usuário não cadastrado");
-    return;
+    usuarioCriado = JSON.parse(localStorage.usuarioCriado);
+    if (usuarioCriado) {
+      if (usuarioCriado.email === email) {
+        if (usuarioCriado.password === senha) {
+          localStorage.setItem("usuario", JSON.stringify(usuarioCriado));
+          window.location.href = "../meus-posts/index.html";
+        } else {
+          alert("Senha incorreta");
+          return;
+        }
+      } 
+    }
+    else  {
+      alert("Usuário não cadastrado");
+      return;
+    }
   }
 }
