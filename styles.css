@@ -125,6 +125,10 @@ button.desktop a.login {
   max-width: 12rem;
 }
 
+.logo:hover {
+  transform: scale(1.03);
+}
+
 .header-content .bg-item {
   position: absolute;
   opacity: 32%;
@@ -651,6 +655,11 @@ button.desktop a.login {
   gap: 1rem;
   padding: 0 1rem;
   border-right: 1px solid var(--gray-100);
+}
+
+.comment-header h4,
+p {
+  color: var(--green-700);
 }
 
 .comment-content {
